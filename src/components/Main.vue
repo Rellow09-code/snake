@@ -38,10 +38,33 @@
         }
     })
 
+    function newDirection(direction){
+        if (direction == 0){
+            snakeDirection = 0
+            snakeDirectionString.value = '⬆️'
+            game.run()
+        }
+        else if (direction == 1){
+            snakeDirection = 1
+            snakeDirectionString.value = '⬇️'
+            game.run()
+        }
+        else if (direction == 2){
+            snakeDirection = 2
+            snakeDirectionString.value = '⬅️'
+            game.run()
+        }
+        else if (direction == 3){
+            snakeDirection = 3
+            snakeDirectionString.value = '➡️'
+            game.run()
+        }
+    }
+
     //scene graph objects
     tile = new SceneNode()
     tile.doDraw = (graphics)=>{
-        if (['#008000','#00FF00'].includes(`${graphics.fillStyle}`)){
+        if (false && ['#008000','#00FF00'].includes(`${graphics.fillStyle}`)){
             graphics.save()
             graphics.scale(0.1,-0.2)
             graphics.translate(0.5,0)
@@ -54,7 +77,7 @@
         }
         graphics.save()
         fillRectangle(graphics);
-        graphics.lineWidth = 0.001;
+        graphics.lineWidth = 0.01;
         graphics.strokeStyle = 'white';
         rectangle(graphics);
         graphics.restore();
@@ -319,9 +342,91 @@
 </script>
 
 <template>
-    <canvas ref="gameEnv" width="500" height="500"></canvas>
+    <section id="game">
+        <canvas ref="gameEnv"></canvas>
+        <section id="horizontal_controls">
+            <button style="height: 50%;" @click='newDirection(2)'>⬅</button>
+            <section id="vertical_controls">
+                <button @click='newDirection(0)'>⬆</button>
+                <button @click='newDirection(1)'>⬇</button>
+            </section>
+            <button style="height: 50%;" @click='newDirection(3)'>➡</button>
+        </section>
+    </section>
     <h1>Current direction : {{ snakeDirectionString }}</h1>
 </template>
 
 <style scoped>
+    #horizontal_controls{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        user-select: none;
+        background-color: rgba(0, 0, 255, 0.1);
+        border-radius: 100%;
+        height: 50vh;
+        width: 50vh;
+    }
+    #vertical_controls{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        gap: 4vh;
+        height: 100%;
+    }
+
+    button {
+        height: 40%;
+        width:10vh;
+        font-size: 8vh;
+        border-radius: 2vh;
+        background: rgba(0, 0, 255, 0.6);
+        border: none;
+        z-index: 10;
+    }
+
+    #game{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+    }
+
+    @media (max-width: 767px) {
+    /* Phones */
+        canvas {
+            width: 90vw;
+            height: 90vw;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+    /* Tablets */
+         canvas {
+            width: 75vh;
+            height: 75vh;
+        }
+
+        #game{
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+    /* Laptops / desktops */
+        canvas {
+            width: 75vh;
+            height: 75vh;
+        }
+
+        #game{
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+
+
 </style>

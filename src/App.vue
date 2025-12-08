@@ -21,5 +21,6 @@ import Main from '@/components/Main.vue';
     flex-direction: column;
     align-items: center;
     height: 100%;
+    gap: 2vh;
   }
 </style>

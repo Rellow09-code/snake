@@ -11,9 +11,6 @@
 
 <style scoped>
     #footer{
-        position:fixed;
         color: brown;
-        bottom: 0%;
-        left:42%
     }
 </style>
