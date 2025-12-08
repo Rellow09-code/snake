@@ -61,10 +61,21 @@
         }
     }
 
+    //fix the annoying scrolling with arrow keys
+    window.addEventListener("keydown", function(e) {
+        // Array of keys that scroll the page
+        const keysToDisable = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+        
+        if (keysToDisable.includes(e.key)) {
+            e.preventDefault(); // Stop the default scrolling
+        }
+    });
+
+
     //scene graph objects
     tile = new SceneNode()
     tile.doDraw = (graphics)=>{
-        if (false && ['#008000','#00FF00'].includes(`${graphics.fillStyle}`)){
+        if (['#008000','#00FF00'].includes(`${graphics.fillStyle}`)){
             graphics.save()
             graphics.scale(0.1,-0.2)
             graphics.translate(0.5,0)
